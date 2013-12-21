@@ -4,11 +4,22 @@ import os
 
 thisdir = os.path.abspath(os.path.dirname(__file__))
 sourcedir = os.path.join(thisdir,'source')
+libdir = os.path.join(thisdir,'lib')
 
-def build(sources,out):
+def build(sources,libs,out):
     sources = [os.path.join(sourcedir,s) for s in sources]
+    libs = [os.path.join(libdir,s) for s in libs]
     out = os.path.join(thisdir,out)
     with open(out,'w') as outfile:
+        
+        # include libfiles
+        for lib in libs:
+            with open(lib) as libfile:
+                outfile.write('\n')
+                outfile.write(libfile.read())
+                outfile.write('\n')
+                
+        # include sources
         for source in sources:
             with open(source) as sourcefile:
                 outfile.write('\n')
@@ -16,10 +27,16 @@ def build(sources,out):
                 outfile.write('\n')
 
 if __name__ == '__main__':
-    build(# Source files
-          ['joop.class.js',
+    build([ # Source files
+           'joop.helpers.js',
+           'joop.init.js',
+           'joop.class.js',
            'joop.singleton.js',
            'joop.object.js',
-           'joop.helpers.js'],
+           ],
+          [ # Libraries to insert before sources
+           'jquery/jquery-1.10.2.min.js',
+           'sprintf/sprintf.js',
+           ],
           # Output file
           'joop-1.0.js')
