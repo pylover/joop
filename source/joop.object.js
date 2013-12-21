@@ -1,6 +1,6 @@
 
 
-Class('oop.Object',{
+Class('joop.Object',{
 	__init__ : function(){ /* coyote.Object */},
 	callSuper: function(cls,functionName,args){
 		return cls.prototype[functionName].apply(this,args);

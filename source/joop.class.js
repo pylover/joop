@@ -17,14 +17,14 @@ var Class = function(){
 				%s.prototype.__init__.apply(this,arguments); \
 			};%s'.format(className,className,className,className));
 	
-	classConstructor.prototype = Object.create(oop.Object.prototype);
+	classConstructor.prototype = Object.create(joop.Object.prototype);
 
 	// Inheritance	
 	var bases = definitions.filter(function(item,index,arr){
 		return index > 0 && index < arr.length - 1;
 	});
-	if(bases.length <= 0 && className != 'oop.Object'){
-		bases = [oop.Object];
+	if(bases.length <= 0 && className != 'joop.Object'){
+		bases = [joop.Object];
 	}
 	for (var i in bases){
 		if (bases[i] == undefined){
