@@ -1,6 +1,5 @@
 
 
-test( "hello test", function() {
-
-  ok( 1 == "1", "Passed!" );
+test( "Import", function() {
+  ok( 1 == "1", "Script Sanitation Passed!" );
 });
