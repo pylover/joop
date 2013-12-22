@@ -60,6 +60,7 @@ test("Test Inheritance", function() {
 
 test("Test Multiple Inheritance", function() {
 	Namespace('engines');
+	
 	Class('engines.Injection',{
 		__init__: function(){
 			this.injection = true;
@@ -81,5 +82,7 @@ test("Test Multiple Inheritance", function() {
 	equal(m3i.cylindres, 6, "Constructor parameter.");
 	equal(m3i.color, 'blue', "Constructor parameter.");
 	ok(m3i.isInjection, "Instance member.");
+	ok(!m3i.isRunning(), "Inheritance hierarchy");
 	
 });
+
