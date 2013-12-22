@@ -195,11 +195,9 @@ function isInstanceOf(obj,cls){
 
 
 
-
-
-
 var Namespace = function(ns){
-	return eval('var %s = {}'.format(ns));
+	window[ns] = {};
+	return window[ns];
 };
 
 
@@ -219,7 +217,7 @@ var Class = function(){
 	var className = definitions[0];
 	
 	if (typeof className != 'string'){
-		throw 'Class Name not provided';
+		throw 'Class Name was not provided';
 	}
 	
 	var classConstructor = eval('%s = function (){ \
