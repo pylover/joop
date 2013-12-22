@@ -1,6 +1,10 @@
 
 
 var Namespace = function(ns){
-	window[ns] = {};
-	return window[ns];
+	var namespaces = ns.split('.');
+	var trailing = window;
+	for(var i in namespaces){
+		trailing = trailing[namespaces[i]] = {};
+	}
+	return trailing;
 };
