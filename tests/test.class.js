@@ -24,7 +24,7 @@ test("Test Instance", function() {
 		},
 		run : function(speed) {
 			this.speed = speed;
-		},
+		}
 	});	
 	
 	equal(bmw.Car.prototype.maxSpeed, 200, "Prototype member.");
@@ -49,7 +49,7 @@ test("Test Inheritance", function() {
 		engineVolume : '3500',
 		__init__ : function(color) {
 			this.callSuper(bmw.Car,'__init__',[color,6]);
-		},
+		}
 	});
 	
 	var m3 = new bmw.M3('green',6);
@@ -75,7 +75,7 @@ test("Test Multiple Inheritance", function() {
 		__init__ : function(color) {
 			this.callSuper(bmw.M3,'__init__',[color]);
 			this.callSuper(engines.Injection,'__init__');
-		},
+		}
 	});
 	
 	var m3i = new bmw.M3i('blue');

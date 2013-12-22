@@ -38,7 +38,7 @@ var Class = function(){
 	
 	// Class codes
 	classConstructor.prototype = extend(false, {},classConstructor.prototype, definitions[definitions.length-1],{
-		constructor: classConstructor,
+		constructor: classConstructor
 	});
 	
 	// Static members

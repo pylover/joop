@@ -10,7 +10,7 @@ Class('joop.Object',{
 	},
 	isInstanceOf: function (cls){
 		return this.__class__.isSubclassOf(cls);
-	},
+	}
 }).StaticMembers({
 	isSubclassOf: function (cls){
 		if (this.__name__ == cls.__name__) return true;
