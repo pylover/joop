@@ -1,7 +1,7 @@
 /**
 Provides the base oop utilities.
 
-@module oop
+@module joop
 **/
 
 var Class = function(){
@@ -9,7 +9,7 @@ var Class = function(){
 	var className = definitions[0];
 	
 	if (typeof className != 'string'){
-		throw 'Class Name not provided';
+		throw 'Class Name was not provided';
 	}
 	
 	var classConstructor = eval('%s = function (){ \
