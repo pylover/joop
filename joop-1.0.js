@@ -358,7 +358,7 @@ var Class = function(){
 	
 	// Class codes
 	classConstructor.prototype = extend(false, {},classConstructor.prototype, definitions[definitions.length-1],{
-		constructor: classConstructor,
+		constructor: classConstructor
 	});
 	
 	// Static members
@@ -405,7 +405,7 @@ Class('joop.Object',{
 	},
 	isInstanceOf: function (cls){
 		return this.__class__.isSubclassOf(cls);
-	},
+	}
 }).StaticMembers({
 	isSubclassOf: function (cls){
 		if (this.__name__ == cls.__name__) return true;
