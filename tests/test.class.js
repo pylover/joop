@@ -84,7 +84,10 @@ test("Test Multiple Inheritance", function() {
 	ok(m3i.isInjection, "Instance member.");
 	ok(!m3i.isRunning(), "Inheritance hierarchy");
 	
-	ok(isInstanceOf(m3i,bmw.M3i) & isInstanceOf(m3i,bmw.M3) & isInstanceOf(m3i,bmw.Car),'isInstanceOf');
+	ok( isInstanceOf(m3i,bmw.M3i) & 
+		isInstanceOf(m3i,bmw.M3) & 
+		isInstanceOf(m3i,bmw.Car) & 
+		isInstanceOf(m3i,joop.Object),'isInstanceOf');
 	
 });
 
