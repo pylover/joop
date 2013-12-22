@@ -31,23 +31,22 @@ var Class = function(){
 			throw 'Invalid base class: %s'.format(bases[i]);
 		}
 		// Static members
-		$.extend(classConstructor,bases[i],{prototype:classConstructor.prototype});
+		extend(classConstructor,bases[i],{prototype:classConstructor.prototype});
 		// Prototype
-		classConstructor.prototype = $.extend(false, classConstructor.prototype, Object.create(bases[i].prototype));
+		classConstructor.prototype = extend(false, classConstructor.prototype, Object.create(bases[i].prototype));
 	}
 	
 	// Class codes
-	classConstructor.prototype = $.extend(false, {},classConstructor.prototype, definitions[definitions.length-1],{
+	classConstructor.prototype = extend(false, {},classConstructor.prototype, definitions[definitions.length-1],{
 		constructor: classConstructor,
 	});
 	
 	// Static members
-	$.extend(classConstructor,{
+	extend(classConstructor,{
 		__name__: className,
 		__base_classes__ : bases,
 		StaticMembers : function(members){
-			//return $.extend(this,members);
-			return $.extend(classConstructor,members);
+			return extend(classConstructor,members);
 		}
 	}); 
 	

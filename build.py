@@ -36,7 +36,6 @@ if __name__ == '__main__':
            'joop.object.js',
            ],
           [ # Libraries to insert before sources
-           'jquery/jquery-1.10.2.min.js',
            'sprintf/sprintf.js',
            ],
           # Output file
