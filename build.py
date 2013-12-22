@@ -29,6 +29,7 @@ def build(sources,libs,out):
 if __name__ == '__main__':
     build([ # Source files
            'joop.helpers.js',
+           'joop.namespace.js',
            'joop.init.js',
            'joop.class.js',
            'joop.singleton.js',

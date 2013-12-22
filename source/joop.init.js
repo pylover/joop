@@ -1,3 +1,3 @@
 
 
-joop = {};
+Namespace('joop');
