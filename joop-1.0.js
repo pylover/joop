@@ -135,12 +135,122 @@
 })(typeof exports != "undefined" ? exports : window);
 
 
+﻿'use strict';
+
+// Add ECMA262-5 method binding if not supported natively
+//
+if (!('bind' in Function.prototype)) {
+    Function.prototype.bind= function(owner) {
+        var that= this;
+        if (arguments.length<=1) {
+            return function() {
+                return that.apply(owner, arguments);
+            };
+        } else {
+            var args= Array.prototype.slice.call(arguments, 1);
+            return function() {
+                return that.apply(owner, arguments.length===0? args : args.concat(Array.prototype.slice.call(arguments)));
+            };
+        }
+    };
+}
+
+// Add ECMA262-5 string trim if not supported natively
+//
+if (!('trim' in String.prototype)) {
+    String.prototype.trim= function() {
+        return this.replace(/^\s+/, '').replace(/\s+$/, '');
+    };
+}
+
+// Add ECMA262-5 Array methods if not supported natively
+//
+if (!('indexOf' in Array.prototype)) {
+    Array.prototype.indexOf= function(find, i /*opt*/) {
+        if (i===undefined) i= 0;
+        if (i<0) i+= this.length;
+        if (i<0) i= 0;
+        for (var n= this.length; i<n; i++)
+            if (i in this && this[i]===find)
+                return i;
+        return -1;
+    };
+}
+if (!('lastIndexOf' in Array.prototype)) {
+    Array.prototype.lastIndexOf= function(find, i /*opt*/) {
+        if (i===undefined) i= this.length-1;
+        if (i<0) i+= this.length;
+        if (i>this.length-1) i= this.length-1;
+        for (i++; i-->0;) /* i++ because from-argument is sadly inclusive */
+            if (i in this && this[i]===find)
+                return i;
+        return -1;
+    };
+}
+if (!('forEach' in Array.prototype)) {
+    Array.prototype.forEach= function(action, that /*opt*/) {
+        for (var i= 0, n= this.length; i<n; i++)
+            if (i in this)
+                action.call(that, this[i], i, this);
+    };
+}
+if (!('map' in Array.prototype)) {
+    Array.prototype.map= function(mapper, that /*opt*/) {
+        var other= new Array(this.length);
+        for (var i= 0, n= this.length; i<n; i++)
+            if (i in this)
+                other[i]= mapper.call(that, this[i], i, this);
+        return other;
+    };
+}
+if (!('filter' in Array.prototype)) {
+    Array.prototype.filter= function(filter, that /*opt*/) {
+        var other= [], v;
+        for (var i=0, n= this.length; i<n; i++)
+            if (i in this && filter.call(that, v= this[i], i, this))
+                other.push(v);
+        return other;
+    };
+}
+if (!('every' in Array.prototype)) {
+    Array.prototype.every= function(tester, that /*opt*/) {
+        for (var i= 0, n= this.length; i<n; i++)
+            if (i in this && !tester.call(that, this[i], i, this))
+                return false;
+        return true;
+    };
+}
+if (!('some' in Array.prototype)) {
+    Array.prototype.some= function(tester, that /*opt*/) {
+        for (var i= 0, n= this.length; i<n; i++)
+            if (i in this && tester.call(that, this[i], i, this))
+                return true;
+        return false;
+    };
+}
+
+if (!Object.create) {
+    Object.create = (function(){
+        function F(){}
+
+        return function(o){
+            if (arguments.length != 1) {
+                throw new Error('Object.create implementation only accepts one parameter.');
+            }
+            F.prototype = o;
+            return new F()
+        }
+    })()
+}
+
 
 /**
  * Provides helper objects
  * @module helpers 
  * @main helpers
  */
+
+
 
 if (typeof String.prototype.startsWith != 'function') {
   String.prototype.startsWith = function (str){
@@ -306,8 +416,14 @@ extend = function() {
 var Namespace = function(ns){
 	var namespaces = ns.split('.');
 	var trailing = window;
+	/*
 	for(var i in namespaces){
 		trailing = trailing[namespaces[i]] = {};
+	}
+	*/
+    for (var i= 0, n= namespaces.length; i<n; i++){
+	    trailing[namespaces[i]] = {};
+	    trailing = trailing[namespaces[i]];
 	}
 	return trailing;
 };
@@ -332,7 +448,7 @@ var Class = function(){
 		throw 'Class Name was not provided';
 	}
 	
-	var classConstructor = eval('%s = function (){ \
+	var classConstructor = eval('window.%s = function (){ \
 				this.__class__ = %s; \
 				%s.prototype.__init__.apply(this,arguments); \
 			};%s'.format(className,className,className,className));
@@ -398,6 +514,9 @@ var Singleton = function(){
 Class('joop.Object',{
 	__init__ : function(){ /* coyote.Object */},
 	callSuper: function(cls,functionName,args){
+	    if (args == undefined){
+	        args = [];
+	    }
 		return cls.prototype[functionName].apply(this,args);
 	},
 	__repr__: function(){
@@ -409,7 +528,7 @@ Class('joop.Object',{
 }).StaticMembers({
 	isSubclassOf: function (cls){
 		if (this.__name__ == cls.__name__) return true;
-		for (var index in this.__base_classes__){
+		for (var index=0, n = this.__base_classes__.length; index < n; index++){
 			var base = this.__base_classes__[index]; 
 			if ( base.isSubclassOf.apply(base,[cls])){
 				return true;

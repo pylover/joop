@@ -30,6 +30,7 @@ def build(sources,libs,out):
 
 if __name__ == '__main__':
     build([ # Source files
+           'joop.ie.compat.js',
            'joop.helpers.js',
            'joop.namespace.js',
            'joop.init.js',
