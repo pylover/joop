@@ -62,6 +62,10 @@ To declare a new class:
 Accessing prototype member:
 
 	console.log(bmw.Car.prototype.maxSpeed);
+	
+Instantiating:
+
+	var myCar = new bmw.Car('silver');
 
 ## Inheritance
 
@@ -69,12 +73,12 @@ To inderit a class:
 
 	Class('bmw.M3', bmw.Car, {
 		engineVolume : '3500',
-		__init__ : function(color) {
-			this.callSuper(bmw.Car,'__init__',[color,6]); // Calling super class method
+		__init__ : function(color) {						// Overriding a constructor
+			this.callSuper(bmw.Car,'__init__',[color,6]); 	// Calling super class method
 		}
 	});
 
-To inderit multiple classes:
+To inherit multiple classes:
 
 	Namespace('engines');
 	
@@ -96,3 +100,34 @@ To inderit multiple classes:
 	});
 
 ## Singleton
+
+To create a singleton object:
+
+	Singleton('bmw.factory.Factory', {
+		__init__ : function() {				// Parameter-less constructor
+		}
+	});	
+	
+	var factory = bmw.factory.Factory; // The singleton instance
+
+
+## Tested Browsers
+
+ * Firefox >= 5.0
+ * Opera >= 12.0
+ * Safari
+ * Chrome
+ * IE >= 9.0	
+
+## Contributing
+
+To contribute to this project, simply fork and clone it.
+
+Update some code files, and test scripts in `tests` directory. Check your works by openning `tests/test.html` by a browser.
+ 
+You need a python interpreter to generate output:
+	
+	python build.py
+
+bingo !
+
