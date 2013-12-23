@@ -5,6 +5,7 @@ import os
 thisdir = os.path.abspath(os.path.dirname(__file__))
 sourcedir = os.path.join(thisdir,'source')
 libdir = os.path.join(thisdir,'lib')
+__version__ = '1.0'
 
 def build(sources,libs,out):
     sources = [os.path.join(sourcedir,s) for s in sources]
@@ -42,4 +43,4 @@ if __name__ == '__main__':
            'sprintf/sprintf.js',
            ],
           # Output file
-          'joop-1.0.js')
+          'joop-%s.js' % __version__)
