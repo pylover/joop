@@ -53,7 +53,7 @@ To declare a new class:
 			this.speed = speed;
 		}
 	}).StaticMembers({
-		doors: 4, //Static field
+		doors: 4, 								//Static field
 		createSuperClass: function(){ 			// Static method
 			return new this('gold',12);
 		}
@@ -115,7 +115,7 @@ To create a singleton object:
 		}
 	});	
 	
-	var factory = bmw.factory.Factory; // The singleton instance
+	var factory = bmw.factory.Factory; 		// Singleton instance
 
 
 ### Tested Browsers
