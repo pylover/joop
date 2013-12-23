@@ -155,7 +155,7 @@ See [here](https://github.com/alexei/sprintf.js) for full format string characte
 
 To contribute to this project, simply fork and clone it.
 
-Update some code files, and test scripts in `tests` directory. Check your works by openning `tests/test.html` by a browser.
+Update some code files, and test scripts in `tests` directory. Check your works by openning `tests/test.source.html` by a browser.
  
 You need a python interpreter to generate output:
 	
