@@ -5,7 +5,7 @@ Javascript Object-Oriented Programming Toolkit
 
 **joop** helps you easily play with OOP concepts in javascript.
 
-## Futures:
+## Features:
 
  * Javascript prototype
  * Inheritance hierarchy
