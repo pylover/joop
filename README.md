@@ -28,14 +28,14 @@ To include joop into your webpage, simply add a script reference to it:
 	</body>
 	</html>
 	
-## Namespace Declaration
+### Namespace Declaration
 
 Namespaces can be separated by dots `.` 
 
 	Namespace('bmw.factory.lab');
 	
 	
-## Class Declaration
+### Class Declaration
 
 To declare a new class:
 
@@ -67,7 +67,14 @@ Instantiating:
 
 	var myCar = new bmw.Car('silver');
 
-## Inheritance
+Checking an instance:
+
+	if (isInstanceOf(myCar, bmw.Car)){
+		// Do something !
+	}
+
+
+### Inheritance
 
 To inderit a class:
 
@@ -99,7 +106,7 @@ To inherit multiple classes:
 		}
 	});
 
-## Singleton
+### Singleton
 
 To create a singleton object:
 
@@ -111,7 +118,7 @@ To create a singleton object:
 	var factory = bmw.factory.Factory; // The singleton instance
 
 
-## Tested Browsers
+### Tested Browsers
 
  * Firefox >= 5.0
  * Opera >= 12.0
@@ -119,7 +126,7 @@ To create a singleton object:
  * Chrome
  * IE >= 9.0	
 
-## Contributing
+### Contributing
 
 To contribute to this project, simply fork and clone it.
 
