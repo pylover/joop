@@ -14,7 +14,7 @@ Javascript Object-Oriented Programming Toolkit
  * Static members
 
  
-## Setup:
+### Setup:
 
 To include joop into your webpage, simply add a script reference to it:
 
@@ -128,6 +128,17 @@ To create a singleton object:
 	
 	var factory = bmw.factory.Factory; 		// Singleton instance
 
+### Useful helpers
+
+#### string.format
+
+	console.log('- %s -'.format('some string'));
+
+#### Arguments to Array
+
+	function myFunc(){
+		var args = asArray(arguments,2); // converts the argument object into array, start from index 2
+	}
 
 ### Tested Browsers
 
