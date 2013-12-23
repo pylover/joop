@@ -3,6 +3,9 @@
 Class('joop.Object',{
 	__init__ : function(){ /* coyote.Object */},
 	callSuper: function(cls,functionName,args){
+	    if (args == undefined){
+	        args = [];
+	    }
 		return cls.prototype[functionName].apply(this,args);
 	},
 	__repr__: function(){
@@ -14,7 +17,7 @@ Class('joop.Object',{
 }).StaticMembers({
 	isSubclassOf: function (cls){
 		if (this.__name__ == cls.__name__) return true;
-		for (var index in this.__base_classes__){
+		for (var index=0, n = this.__base_classes__.length; index < n; index++){
 			var base = this.__base_classes__[index]; 
 			if ( base.isSubclassOf.apply(base,[cls])){
 				return true;

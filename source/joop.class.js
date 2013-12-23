@@ -12,7 +12,7 @@ var Class = function(){
 		throw 'Class Name was not provided';
 	}
 	
-	var classConstructor = eval('%s = function (){ \
+	var classConstructor = eval('window.%s = function (){ \
 				this.__class__ = %s; \
 				%s.prototype.__init__.apply(this,arguments); \
 			};%s'.format(className,className,className,className));

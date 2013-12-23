@@ -1,5 +1,9 @@
 
-Namespace('bmw');
+
+
+
+
+
 
 //delete bmw;
 module("Class test", {
@@ -9,28 +13,30 @@ module("Class test", {
 
 test("Test Instance", function() {
 	
-	Class('bmw.Car', {
-		// Prototype member
-		maxSpeed : 200,
-		__init__ : function(color,cylindres) {
-			//Instance Member
-			this.speed = 0;
-			this.color = color;
-			this.cylindres = cylindres == undefined ? 4 : cylindres; 
-				
-		},
-		isRunning : function() {
-			return this.speed > 0;
-		},
-		run : function(speed) {
-			this.speed = speed;
-		}
-	}).StaticMembers({
-		doors: 4,
-		createSuperClass: function(){
-			return new this('gold',12);
-		}
-	});	
+    Namespace('bmw');
+
+    Class('bmw.Car', {
+	    // Prototype member
+	    maxSpeed : 200,
+	    __init__ : function(color,cylindres) {
+		    //Instance Member
+		    this.speed = 0;
+		    this.color = color;
+		    this.cylindres = cylindres == undefined ? 4 : cylindres; 
+    			
+	    },
+	    isRunning : function() {
+		    return this.speed > 0;
+	    },
+	    run : function(speed) {
+		    this.speed = speed;
+	    }
+    }).StaticMembers({
+	    doors: 4,
+	    createSuperClass: function(){
+		    return new this('gold',12);
+	    }
+    });	
 	
 	equal(bmw.Car.prototype.maxSpeed, 200, "Prototype member.");
 
@@ -56,12 +62,12 @@ test("Test Instance", function() {
 
 test("Test Inheritance", function() {
 
-	Class('bmw.M3', bmw.Car, {
-		engineVolume : '3500',
-		__init__ : function(color) {
-			this.callSuper(bmw.Car,'__init__',[color,6]);
-		}
-	});
+    Class('bmw.M3', bmw.Car, {
+	    engineVolume : '3500',
+	    __init__ : function(color) {
+		    this.callSuper(bmw.Car,'__init__',[color,6]);
+	    }
+    });
 	
 	var m3 = new bmw.M3('green',6);
 	equal(m3.cylindres, 6, "Constructor parameter.");
@@ -70,29 +76,36 @@ test("Test Inheritance", function() {
 });
 
 test("Test Multiple Inheritance", function() {
-	Namespace('engines');
 	
-	Class('engines.Injection',{
-		__init__: function(){
-			this.injection = true;
-		},
-		isInjection: function(){
-			return this.injection;
-		}
-	});
+    Namespace('engines');
 
-	Class('bmw.M3i', bmw.M3, engines.Injection, {
-		
-		__init__ : function(color) {
-			this.callSuper(bmw.M3,'__init__',[color]);
-			this.callSuper(engines.Injection,'__init__');
-		}
-	});
+
+    Class('engines.Injection',{
+	    __init__: function(){
+		    this.injection = true;
+	    },
+	    isInjection: function(){
+		    return this.injection;
+	    }
+    });
+
+
+    Class('bmw.M3i', bmw.M3, engines.Injection, {
+    	
+	    __init__ : function(color) {
+		    this.callSuper(bmw.M3,'__init__',[color]);
+		    this.callSuper(engines.Injection,'__init__');
+	    }
+    });
 	
-	var m3i = new bmw.M3i('blue');
+    var m3i = new bmw.M3i('blue');	
+	
+	
 	equal(m3i.cylindres, 6, "Constructor parameter.");
 	equal(m3i.color, 'blue', "Constructor parameter.");
-	ok(m3i.isInjection, "Instance member.");
+	
+	ok(m3i.injection, "Instance member.");
+	ok(m3i.isInjection(), "Instance method.");
 	ok(!m3i.isRunning(), "Inheritance hierarchy");
 	
 	ok( isInstanceOf(m3i,bmw.M3i) & 
