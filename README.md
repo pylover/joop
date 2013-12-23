@@ -124,7 +124,7 @@ To create a singleton object:
  * Opera
  * Safari
  * Chrome
- * IE >= 9.0	
+ * IE >= 6.0	
 
 ### Contributing
 
