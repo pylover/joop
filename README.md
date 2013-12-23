@@ -120,8 +120,8 @@ To create a singleton object:
 
 ### Tested Browsers
 
- * Firefox >= 5.0
- * Opera >= 12.0
+ * Firefox
+ * Opera
  * Safari
  * Chrome
  * IE >= 9.0	
