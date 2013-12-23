@@ -140,6 +140,8 @@ To create a singleton object:
 		var args = asArray(arguments,2); // converts the argument object into array, start from index 2
 	}
 
+See [here](https://github.com/alexei/sprintf.js) for full format string characters.
+
 ### Tested Browsers
 
  * Chrome
