@@ -25,6 +25,8 @@ def build(sources,libs,out):
                 outfile.write('\n')
                 outfile.write(sourcefile.read())
                 outfile.write('\n')
+                
+    print('the file: "%s" was generated successfully. ' % out)
 
 if __name__ == '__main__':
     build([ # Source files
