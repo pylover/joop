@@ -120,10 +120,10 @@ To create a singleton object:
 
 ### Tested Browsers
 
- * Firefox
- * Opera
- * Safari
  * Chrome
+ * Safari
+ * Opera
+ * Firefox
  * IE >= 6.0	
 
 ### Contributing
@@ -136,5 +136,5 @@ You need a python interpreter to generate output:
 	
 	python build.py
 
-bingo !
+
 
