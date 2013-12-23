@@ -3,7 +3,7 @@
 
 Javascript Object-Oriented Programming Toolkit
 
-**joop** helps you easily play with OOP concepts in javascript.
+**joop** helps you to easily play with OOP concepts in javascript.
 
 ## Features:
 
@@ -34,6 +34,10 @@ Namespaces can be separated by dots `.`
 
 	Namespace('bmw.factory.lab');
 	
+	console.log(bmw);
+	console.log(bmw.factory);
+	console.log(bmw.factory.lab);
+
 	
 ### Class Declaration
 
@@ -53,7 +57,7 @@ To declare a new class:
 			this.speed = speed;
 		}
 	}).StaticMembers({
-		doors: 4, 								//Static field
+		doors: 4, 								// Static field
 		createSuperClass: function(){ 			// Static method
 			return new this('gold',12);
 		}
@@ -63,10 +67,17 @@ Accessing prototype member:
 
 	console.log(bmw.Car.prototype.maxSpeed);
 	
+Accessing static members:
+
+	console.log(bmw.Car.doors);
+	var superCar = bmw.Car.createSuperClass();
+	
 Instantiating:
 
 	var myCar = new bmw.Car('silver');
-
+	myCar.run(30);
+	console.log(myCar.isRunning());
+	
 Checking an instance:
 
 	if (isInstanceOf(myCar, bmw.Car)){
