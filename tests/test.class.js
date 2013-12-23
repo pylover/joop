@@ -25,6 +25,11 @@ test("Test Instance", function() {
 		run : function(speed) {
 			this.speed = speed;
 		}
+	}).StaticMembers({
+		doors: 4,
+		createSuperClass: function(){
+			return new this('gold',12);
+		}
 	});	
 	
 	equal(bmw.Car.prototype.maxSpeed, 200, "Prototype member.");
@@ -40,6 +45,12 @@ test("Test Instance", function() {
 	myCar.run(30);
 	ok(myCar.isRunning(), "Method call");
 	equal(myCar.speed, 30, "Field verification.");
+	
+	// Static members
+	equal(bmw.Car.doors, 4, 'Static field');
+	var superClass = bmw.Car.createSuperClass();
+	equal(superClass.color, 'gold', 'Static method' );
+	ok(isInstanceOf(superClass,bmw.Car), 'static method');
 
 });
 

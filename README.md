@@ -11,6 +11,7 @@ Javascript Object-Oriented Programming Toolkit
  * Inheritance hierarchy
  * Multiple inheritance & mixins
  * Singleton pattern
+ * Static members
 
  
 ## Setup:
