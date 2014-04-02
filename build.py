@@ -5,7 +5,7 @@ import os
 thisdir = os.path.abspath(os.path.dirname(__file__))
 sourcedir = os.path.join(thisdir,'source')
 libdir = os.path.join(thisdir,'lib')
-__version__ = '1.0'
+__version__ = '1.1'
 
 def build(sources,libs,out,minified_out):
     sources = [os.path.join(sourcedir,s) for s in sources]
