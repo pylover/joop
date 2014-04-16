@@ -30,10 +30,14 @@ var Class = function(){
 		if (bases[i] == undefined){
 			throw 'Invalid base class: %s'.format(bases[i]);
 		}
+		var baseClass = bases[i]; 
+		if (typeof baseClass == 'string'){
+			baseClass = eval(baseClass);
+		}
 		// Static members
-		extend(classConstructor,bases[i],{prototype:classConstructor.prototype});
+		extend(classConstructor,baseClass,{prototype:classConstructor.prototype});
 		// Prototype
-		classConstructor.prototype = extend(false, classConstructor.prototype, Object.create(bases[i].prototype));
+		classConstructor.prototype = extend(false, classConstructor.prototype, Object.create(baseClass.prototype));
 	}
 	
 	// Class codes

@@ -5,14 +5,15 @@ import os
 thisdir = os.path.abspath(os.path.dirname(__file__))
 sourcedir = os.path.join(thisdir,'source')
 libdir = os.path.join(thisdir,'lib')
-__version__ = '1.1'
+__version__ = '1.2'
 
-def build(sources,libs,out,minified_out):
+def build(sources,libs,out,minified_out,header=None):
     sources = [os.path.join(sourcedir,s) for s in sources]
     libs = [os.path.join(libdir,s) for s in libs]
     out = os.path.join(thisdir,out)
     with open(out,'w') as outfile:
-        
+        if header:
+            outfile.write(header)
         # include libfiles
         for lib in libs:
             with open(lib) as libfile:
@@ -42,8 +43,17 @@ def build(sources,libs,out,minified_out):
     """
     print('the file: "%s" was generated successfully. ' % out)
 
+
+out_header="""
+/*!
+    joop: javascript OOP toolkit
+    author: Vahid Mardani
+    version: %s
+*/
+""" % __version__
+
 if __name__ == '__main__':
-    out_filename = 'joop-%s.js' % __version__
+    out_filename = 'build/joop-%s.js' % __version__
     minified_out_filename = 'joop-%s.min.js' % __version__
     build([ # Source files
            'joop.ie.compat.js',
@@ -58,6 +68,6 @@ if __name__ == '__main__':
            'sprintf/sprintf.js',
            ],
           # Output files
-          out_filename,minified_out_filename)
+          out_filename,minified_out_filename,header=out_header)
 
              
