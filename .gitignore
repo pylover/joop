@@ -33,3 +33,5 @@ doc/_build
 
 #Python3
 __pycache__
+
+.idea/

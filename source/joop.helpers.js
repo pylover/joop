@@ -21,7 +21,7 @@ if (typeof String.prototype.endsWith != 'function') {
 
 if (typeof String.prototype.format != 'function') {
 	String.prototype.format = function(){
-		args = [this];
+		var args = [this];
 		for ( var i=0; i < arguments.length ; i++){
 			args.push(arguments[i]);
 		}
@@ -102,7 +102,7 @@ var isArray = Array.isArray || function( obj ) {
 	return Object.prototype.toString.call( someVar ) === '[object Array]';
 };
 
-extend = function() {
+function extend() {
 	var src, copyIsArray, copy, name, options, clone,
 		target = arguments[0] || {},
 		i = 1,

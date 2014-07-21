@@ -2,7 +2,7 @@
 /*!
     joop: javascript OOP toolkit
     author: Vahid Mardani
-    version: 1.2
+    version: 1.3
 */
 
 /*! 
@@ -145,52 +145,58 @@
 })(typeof exports != "undefined" ? exports : window);
 
 
-﻿'use strict';
+﻿
+'use strict';
 
 // Add ECMA262-5 method binding if not supported natively
 //
-if (!('bind' in Function.prototype)) {
-    Function.prototype.bind= function(owner) {
-        var that= this;
-        if (arguments.length<=1) {
-            return function() {
+if (!Function.prototype.hasOwnProperty('bind')) {
+    Function.prototype.bind = function (owner) {
+        var that = this,
+            args = Array.prototype.slice.call(arguments, 1);
+        if (arguments.length <= 1) {
+            return function () {
                 return that.apply(owner, arguments);
             };
-        } else {
-            var args= Array.prototype.slice.call(arguments, 1);
-            return function() {
-                return that.apply(owner, arguments.length===0? args : args.concat(Array.prototype.slice.call(arguments)));
-            };
         }
+        return function () {
+            return that.apply(owner, arguments.length === 0 ? args : args.concat(Array.prototype.slice.call(arguments)));
+        };
+
     };
 }
 
 // Add ECMA262-5 string trim if not supported natively
 //
-if (!('trim' in String.prototype)) {
-    String.prototype.trim= function() {
+if (!String.prototype.hasOwnProperty('trim')) {
+    String.prototype.trim = function () {
         return this.replace(/^\s+/, '').replace(/\s+$/, '');
     };
 }
 
 // Add ECMA262-5 Array methods if not supported natively
 //
-if (!('indexOf' in Array.prototype)) {
-    Array.prototype.indexOf= function(find, i /*opt*/) {
-        if (i===undefined) i= 0;
-        if (i<0) i+= this.length;
-        if (i<0) i= 0;
-        for (var n= this.length; i<n; i++)
-            if (i in this && this[i]===find)
+if (!Array.prototype.hasOwnProperty('indexOf')) {
+    Array.prototype.indexOf = function (find, i) {
+        var n;
+        /*i is optional*/
+        if (i === undefined) { i = 0; }
+        if (i < 0) { i += this.length; }
+        if (i < 0) { i = 0; }
+        for (n = this.length; i < n; i += 1) {
+            if (this.hasOwnProperty(i) && this[i] === find) {
                 return i;
+            }
+        }
         return -1;
     };
 }
-if (!('lastIndexOf' in Array.prototype)) {
-    Array.prototype.lastIndexOf= function(find, i /*opt*/) {
-        if (i===undefined) i= this.length-1;
-        if (i<0) i+= this.length;
-        if (i>this.length-1) i= this.length-1;
+if (!Array.prototype.hasOwnProperty('lastIndexOf')) {
+    Array.prototype.lastIndexOf = function (find, i) {
+        /*i is opt*/
+        if (i === undefined) { i = this.length - 1; }
+        if (i < 0) { i += this.length; }
+        if (i > this.length - 1) { i = this.length - 1; }
         for (i++; i-->0;) /* i++ because from-argument is sadly inclusive */
             if (i in this && this[i]===find)
                 return i;
@@ -276,7 +282,7 @@ if (typeof String.prototype.endsWith != 'function') {
 
 if (typeof String.prototype.format != 'function') {
 	String.prototype.format = function(){
-		args = [this];
+		var args = [this];
 		for ( var i=0; i < arguments.length ; i++){
 			args.push(arguments[i]);
 		}
@@ -357,7 +363,7 @@ var isArray = Array.isArray || function( obj ) {
 	return Object.prototype.toString.call( someVar ) === '[object Array]';
 };
 
-extend = function() {
+function extend() {
 	var src, copyIsArray, copy, name, options, clone,
 		target = arguments[0] || {},
 		i = 1,
